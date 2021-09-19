@@ -5,12 +5,12 @@
 		"persons": {
 			"type": "array",
 			"items": {
-			"type": "object",
+				"type": "object",
 				"properties": {
 					"cuisines": {
 						"type": "array",
 						"items": {
-							"type":"string"
+							"type": "string"
 						}
 					}
 				},

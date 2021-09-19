@@ -9,15 +9,13 @@ import { InvalidInputError } from "@root/errors/rest-errors/exceptions/invalid-i
 /**
  * An interface for micro-service controllers.
  */
- export abstract class Controller {
+export abstract class Controller {
 	protected validator = new Validator()
 
 	/**
 	 * @param httpListener The listener of incoming HTTP requests. Used to subscribe to HTTP requests.
 	 */
-	constructor(
-		protected httpListener: HttpListener
-	) {}
+	constructor(protected httpListener: HttpListener) {}
 
 	/**
 	 * Connects the controller to the HttpListener.
@@ -36,7 +34,7 @@ import { InvalidInputError } from "@root/errors/rest-errors/exceptions/invalid-i
 	): Promise<SuccessResponse | ErrorResponse> {
 		// Check the validity of the request body
 		let isValid: boolean = true
-		let messages: string []
+		let messages: string[]
 
 		if (bodySchema !== undefined) {
 			isValid = this.validator.validate(request.body, bodySchema).valid
@@ -44,7 +42,7 @@ import { InvalidInputError } from "@root/errors/rest-errors/exceptions/invalid-i
 		if (paramsSchema !== undefined) {
 			const result = this.validator.validate(request.query, paramsSchema)
 			isValid = isValid && this.validator.validate(request.query, paramsSchema).valid
-			 messages = result.errors.map((error) => {
+			messages = result.errors.map((error) => {
 				return error.message
 			})
 		}
@@ -55,7 +53,7 @@ import { InvalidInputError } from "@root/errors/rest-errors/exceptions/invalid-i
 		}
 		// Else return the error for invalid input.
 		else {
-			return new InvalidInputError(undefined,messages).toRestError().toErrorResponse()
+			return new InvalidInputError(undefined, messages).toRestError().toErrorResponse()
 		}
 	}
 

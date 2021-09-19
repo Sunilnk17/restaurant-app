@@ -4,12 +4,7 @@ import { RestErrorType } from "@root/rest/rest-error-type"
 
 class InvalidInputRestError extends RestError {
 	constructor(public details?: string, public messages?: string[]) {
-		super(
-			RestErrorType.InvalidInput,
-			"The input of the request is invalid.",
-			undefined,
-			400
-		)
+		super(RestErrorType.InvalidInput, "The input of the request is invalid.", undefined, 400)
 	}
 }
 

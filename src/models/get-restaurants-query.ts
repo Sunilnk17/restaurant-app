@@ -6,7 +6,7 @@ export interface GetRestaurantsQuery {
 	price?: string
 	latitude?: string
 	longitude?: string
-	maxDistanceInMs?: string,
+	maxDistanceInMs?: string
 	category?: string
 }
 
@@ -31,8 +31,8 @@ export class ParsedGetRestaurantsQuery {
 		const parsed = new ParsedGetRestaurantsQuery()
 
 		parsed.location = data.location
-		parsed.latitude = data.latitude !== undefined ?  Number(data.latitude) : undefined
-		parsed.longitude = data.longitude!==undefined ? Number(data.longitude) : undefined
+		parsed.latitude = data.latitude !== undefined ? Number(data.latitude) : undefined
+		parsed.longitude = data.longitude !== undefined ? Number(data.longitude) : undefined
 		parsed.price = data.price !== undefined ? Number(data.price) : undefined
 		parsed.maxDistanceInMs = data.maxDistanceInMs !== undefined ? Number(data.maxDistanceInMs) : undefined
 		parsed.categories = data.category

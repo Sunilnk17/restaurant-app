@@ -83,7 +83,6 @@ export class HttpListener {
 		}
 	}
 
-
 	/**
 	 * Registers a post-request route on the server, when called it will execute the http callback.
 	 * A post request can have a body.

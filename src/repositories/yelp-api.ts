@@ -23,7 +23,7 @@ export class YelpApi {
 			baseURL: this.yelpConfig.endpoint,
 			timeout: 10000, // 10 seconds
 			headers: {
-				"Authorization": `Bearer ${this.yelpConfig.code}`
+				Authorization: `Bearer ${this.yelpConfig.code}`
 			}
 		})
 	}
