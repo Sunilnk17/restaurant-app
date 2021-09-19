@@ -1,0 +1,15 @@
+version: '3.5'
+services:
+  api:
+    container_name: restaurant-app
+    build:
+      dockerfile: Dockerfile
+      context: ./
+    volumes:
+      - ./logs:/app/logs
+      - ./public:/app/public
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    env_file:
+    - .env

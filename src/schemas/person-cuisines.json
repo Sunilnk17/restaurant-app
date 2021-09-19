@@ -1,0 +1,23 @@
+{
+	"id": "/PersonCuisines",
+	"type": "object",
+	"properties": {
+		"persons": {
+			"type": "array",
+			"items": {
+			"type": "object",
+				"properties": {
+					"cuisines": {
+						"type": "array",
+						"items": {
+							"type":"string"
+						}
+					}
+				},
+				"required": ["cuisines"]
+			}
+		}
+	},
+	"required": ["persons"],
+	"additionalProperties": false
+}

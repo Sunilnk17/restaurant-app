@@ -1,0 +1,42 @@
+{
+	"id": "/GetRestaurantQuery",
+	"type": "object",
+	"properties": {
+		"price": {
+			"type": "string",
+			"minimum": 1,
+			"maximum": 4
+		},
+		"latitude": {
+			"type": "string",
+			"minimum": -90,
+			"maximum": 90
+		},
+		"longitude": {
+			"type": "string",
+			"minimum": -180,
+			"maximum": 180
+		},
+		"location": {
+			"type": "string",
+			"minLength": 1
+		},
+		"maxDistanceInMs": {
+			"type": "string",
+			"minLength": 1
+		},
+		"category": {
+			"type": "string",
+			"minLength": 1
+		}
+	},
+	"oneOf": [
+		{
+			"required": ["location"]
+		},
+		{
+			"required": ["latitude", "longitude"]
+		}
+	],
+	"additionalProperties": false
+}
