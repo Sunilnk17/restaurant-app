@@ -51,6 +51,12 @@ export class RestaurantService {
 				throw new InvalidInputError("Invalid price range.. It could be in the range between 1-4")
 			}
 		}
+
+		if (filters.maxDistanceInMs !== undefined) {
+			if (filters.maxDistanceInMs < 0 || filters.maxDistanceInMs > 4000) {
+				throw new InvalidInputError("Invalid max distance range.. It could be in the range less than 4000. Tech limitations from yelp :/")
+			}
+		}
 	}
 
 	/**
