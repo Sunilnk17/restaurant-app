@@ -4,28 +4,21 @@
 	"properties": {
 		"price": {
 			"type": "string",
-			"minimum": 1,
-			"maximum": 4
+			"minLength": 1
 		},
 		"latitude": {
 			"type": "string",
-			"minimum": -90,
-			"maximum": 90
+			"minLength": 1
 		},
 		"longitude": {
 			"type": "string",
-			"minimum": -180,
-			"maximum": 180
+			"minLength": 1
 		},
 		"location": {
 			"type": "string",
 			"minLength": 1
 		},
 		"maxDistanceInMs": {
-			"type": "string",
-			"minLength": 1
-		},
-		"category": {
 			"type": "string",
 			"minLength": 1
 		}

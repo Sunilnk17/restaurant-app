@@ -7,7 +7,7 @@ class InvalidInputRestError extends RestError {
 		super(
 			RestErrorType.InvalidInput,
 			"The input of the request is invalid.",
-			details,
+			undefined,
 			400
 		)
 	}

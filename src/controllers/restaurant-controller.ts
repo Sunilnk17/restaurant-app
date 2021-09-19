@@ -10,6 +10,7 @@ import PersonCuisinesSchema from "../schemas/person-cuisines.json"
 import { Controller } from "./controller"
 import { GetRestaurantsQuery, ParsedGetRestaurantsQuery } from "@models/get-restaurants-query"
 import { PersonCuisines } from "@models/person-cuisines"
+import { InvalidInputError } from "@root/errors/rest-errors/exceptions/invalid-input-error"
 
 /**
  * Controller for the Restaurant module.

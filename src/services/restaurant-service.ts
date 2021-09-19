@@ -1,6 +1,7 @@
 import { GetRestaurantsQuery, ParsedGetRestaurantsQuery } from "@models/get-restaurants-query"
 import { PersonCuisines } from "@models/person-cuisines"
 import { YelpApi, YelpConfig } from "@repositories/yelp-api"
+import { InvalidInputError } from "@root/errors/rest-errors/exceptions/invalid-input-error"
 
 /**
  * Business logic layer for the Restaurant module.
@@ -23,8 +24,9 @@ export class RestaurantService {
 	 */
 	public async fetchRestaurants(input: PersonCuisines, filters: ParsedGetRestaurantsQuery): Promise<any> {
 
-		const cuisines = this.getCuisines(input)
+		this.validateParams(filters)
 
+		const cuisines = this.getCuisines(input)
 		if(cuisines!==undefined) {
 			const restaurantPromise = cuisines.map((cuisine) => {
 				filters.categories = cuisine.toLocaleLowerCase().trim()
@@ -40,10 +42,40 @@ export class RestaurantService {
 	}
 
 
+	private validateParams(filters: ParsedGetRestaurantsQuery) {
+		if(filters.latitude!== undefined && filters.longitude !== undefined) {
+			if(!this.coordinatesAreValid(filters.latitude, filters.longitude)) {
+				throw new InvalidInputError("Invalid lat and lon values")
+			}
+		}
+
+		if(filters.price !== undefined) {
+			if(filters.price < 0 || filters.price > 4) {
+				throw new InvalidInputError("Invalid price range.. It could be in the range between 1-4")
+			}
+		}
+	}
+
+		/**
+	 *  Checks if the given coordinates represent a valid point in the world map.
+	 *
+	 *  @param lat The latitude of the coordinate
+	 *  @param lon The longitude of the coordinate
+	 */
+		 private coordinatesAreValid(lat: number, lon: number): boolean {
+			const coordinatesAreUndefined = lat === undefined || lon === undefined
+			const coordinatesAreInvalid = lat < -90 || lat > 90 || lon < -180 || lon > 180
+	
+			if (coordinatesAreUndefined || coordinatesAreInvalid) {
+				return false
+			}
+			return true
+		}
+
+
 	// get the list of cuisines that most people are interested with.
 	private getCuisines(input: PersonCuisines) : string[]{
 		const cuisines: string[] = []
-
 		const mapOfCuisinesFrequency: Map<string,number> = new Map<string, number>()
 
 		input.persons.forEach((personCuisines) => {
