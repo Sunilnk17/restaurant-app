@@ -37,12 +37,12 @@ export class RestaurantController extends Controller {
 	}
 
 	private bindHttp() {
-		// GET
-		this.bindHttpGetRestaurants()
+		// POST
+		this.bindHttpPostRestaurants()
 	}
 
 	// Retrieves all restaurants
-	private bindHttpGetRestaurants(): void {
+	private bindHttpPostRestaurants(): void {
 		this.httpListener.onPost("/restaurants", async (request) => {
 			return await this.validateRequestBody(
 				request,
